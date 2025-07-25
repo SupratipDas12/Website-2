@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+    .container {
+      width: 300px;
+      margin: 80px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(1,0,0,0.2);
+    }
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+      width: 100%;
+      padding: 20px 0px;
+      font-size: 20px;
+      text-align: center;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background: #218838;
+    }
+    .container a{
+      font-size: 20px;
+      padding: 0px 0px 0 100px;
+      margin: 20px;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Login</h2>
+  <form action="Login-page" method="POST">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="submit" value="Login">
+  </form>
+  <a href="register.html">Register</a>
+</div>
+
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", function (e) {
+    const email = form.email.value.trim();
+    const password = form.password.value.trim();
+
+    if (email === "" || password === "") {
+      alert("Please fill in all fields.");
+      e.preventDefault();
+      return;
+    }
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+      alert("Please enter a valid email address.");
+      e.preventDefault();
+      return;
+    }
+
+    if (password.length < 4) {
+      alert("Password must be at least 4 characters.");
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>
