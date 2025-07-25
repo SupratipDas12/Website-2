@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+    .container {
+      width: 300px;
+      margin: 80px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(1,0,0,0.2);
+    }
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+      width: 100%;
+      padding: 20px 0px;
+      font-size: 20px;
+      text-align: center;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background: #218838;
+    }
+    /*.container a{
+      font-size: 30px;
+      /*text-align: center;*/
+     /* text-decoration: none;
+      float: center;
+      margin-top: 400px;
+      text-align: right;
+    }
+    .container a:hover{
+      text-decoration: underline;
+      text-align: center;
+      margin-top: 400px;
+    }*/
+    .login-link{
+      font-size: 20px;
+      padding: 10px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Register</h2>
+  <form action="register.php" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="mobile" placeholder="Mobile Number" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    <input type="submit" value="Register">
+  </form>
+  <div class="login-link">
+      <p>Already Register?<a href="login.html">login</a></p>
+  </div>
+ <!-- <a href="login.html">login</a>-->
+</div>
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", function (e) {
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const mobile = form.mobile.value.trim();
+    const password = form.password.value.trim();
+    const confirm = form.confirm_password.value.trim();
+
+    // Check all fields are filled
+    if (!name || !email || !mobile || !password || !confirm) {
+      alert("Please fill in all fields.");
+      e.preventDefault();
+      return;
+    }
+
+    // Email format check
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+      alert("Invalid email address.");
+      e.preventDefault();
+      return;
+    }
+
+    // Mobile number check (optional)
+    if (!/^\d{10}$/.test(mobile)) {
+      alert("Mobile number must be 10 digits.");
+      e.preventDefault();
+      return;
+    }
+
+    // Password length
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      e.preventDefault();
+      return;
+    }
+
+    // Password match
+    if (password !== confirm) {
+      alert("Passwords do not match.");
+      e.preventDefault();
+    }
+  });
+</script>
+</body>
+</html>
