@@ -1,185 +1,99 @@
-<!--<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Wallet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      background-color: #f4f4f4;
       margin: 0;
       padding: 0;
-    }
-
-    .wallet-container {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       text-align: center;
     }
-
-    h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    .balance {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-
-    input[type="number"] {
-      width: 80%;
-      padding: 10px;
-      margin-top: 15px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #007bff;
+      /*Navbar*/
+    nav {
+      width: 100%;
+      height: 70px;
+      background-color: #333;
       color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      /*justify-content: space-between;*/
+      justify-content: space-around;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .nav-links a:hover {
+      color: #04AA6D;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
       cursor: pointer;
     }
 
-    .btn:hover {
-      background: #0056b3;
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
     }
 
-    .btn-withdraw {
-      background: #28a745;
-    }
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: #444;
+        display: none;
+      }
 
-    .btn-withdraw:hover {
-      background: #1e7e34;
-    }
+      .nav-links.show {
+        display: flex;
+      }
 
-    .message {
-      margin-top: 15px;
-      font-size: 16px;
-    }
-
-    .success {
-      color: green;
-    }
-
-    .error {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-
-<div class="wallet-container">
-  <h2>Wallet</h2>
-  <div class="balance">🪙 Coins: <span id="coinBalance">1000</span></div>
-  <div class="balance">💵 Cash: ₹<span id="cashBalance">0.00</span></div>
-
-  <input type="number" id="coinInput" placeholder="Enter coins to convert (100 coins = ₹1)" step="100" min="100">
-  <br>
-  <button class="btn" onclick="convertToCash()">Convert to Cash</button>
-  <br><br>
-  <input type="number" id="CashInput" placeholder="Enter Your Money (₹1)" step="100" min="100">
-  <br>
-  <button class="btn btn-withdraw" onclick="withdrawCash()">Withdraw Cash</button>
-
-  <div class="message" id="messageBox"></div>
-</div>
-
-<script>
-  // Initial values
-  let coins = 1000;
-  let cash = 0;
-
-  const coinBalance = document.getElementById('coinBalance');
-  const cashBalance = document.getElementById('cashBalance');
-  const messageBox = document.getElementById('messageBox');
-
-  function updateDisplay() {
-    coinBalance.textContent = coins;
-    cashBalance.textContent = cash.toFixed(2);
-  }
-
-  function showMessage(text, type) {
-    messageBox.textContent = text;
-    messageBox.className = `message ${type}`;
-  }
-
-  function convertToCash() {
-    const input = document.getElementById('coinInput');
-    const coinsToConvert = parseInt(input.value);
-
-    if (isNaN(coinsToConvert) || coinsToConvert < 100 || coinsToConvert % 100 !== 0) {
-      showMessage("❌ Please enter a valid amount (minimum 100 coins, in multiples of 100)", "error");
-      return;
-    }
-
-    if (coinsToConvert > coins) {
-      showMessage("❌ You don't have enough coins.", "error");
-      return;
-    }
-
-    const rupees = coinsToConvert / 100;
-    coins -= coinsToConvert;
-    cash += rupees;
-
-    updateDisplay();
-    input.value = "";
-    showMessage(`✅ Converted ${coinsToConvert} coins to ₹${rupees.toFixed(2)} successfully!`, "success");
-  }
-
-  function withdrawCash() {
-    if (cash < 1) {
-      showMessage("❌ Minimum ₹1 required to withdraw.", "error");
-      return;
-    }
-
-    showMessage(`✅ ₹${cash.toFixed(2)} withdrawn successfully!`, "success");
-    cash = 0;
-    updateDisplay();
-  }
-
-  updateDisplay();
-</script>
-
-</body>
-</html>-->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Wallet</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      margin: 0;
-      padding: 0;
-    }
-
-    .wallet-container {
-      max-width: 400px;
-      margin: 60px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
+      .hamburger {
+        display: flex;
+      }
     }
 
     h2 {
-      margin-bottom: 20px;
-      color: #333;
+      margin-top: 100px;
+      font-size: 26px;
+    }
+      /*Wallet Content*/
+    .wallet-container {
+      max-width: 400px;
+      margin: 20px auto 10px;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .balance {
@@ -189,16 +103,15 @@
 
     input[type="number"],
     input[type="text"] {
-      width: 80%;
+      width: 90%;
       padding: 10px;
-      margin-top: 15px;
+      margin: 10px 0;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
     }
 
     .btn {
-      margin-top: 15px;
       padding: 10px 20px;
       background: #007bff;
       color: white;
@@ -206,6 +119,7 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      margin-top: 10px;
     }
 
     .btn:hover {
@@ -221,7 +135,7 @@
     }
 
     .message {
-      margin-top: 15px;
+      margin-top: 10px;
       font-size: 16px;
     }
 
@@ -232,102 +146,152 @@
     .error {
       color: red;
     }
+
+    #historyLog {
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 14px;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+      margin-top: 15px;
+    }
+
+    #historyLog p {
+      margin: 5px 0;
+    }
   </style>
 </head>
 <body>
-
+    <!-- Navbar -->
+<nav>
+  <div class="logo">GameName</div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="Home.html">Home</a>
+    <a href="wallet.html">Wallet</a>
+    <a href="register.html">UPI Change</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+    <!-- Wallet Content -->
 <div class="wallet-container">
   <h2>Wallet</h2>
-  <div class="balance">🪙 Coins: <span id="coinBalance">1000</span></div>
+  <div class="balance">🪙 Coins: <span id="coinBalance">0</span></div>
   <div class="balance">💵 Cash: ₹<span id="cashBalance">0.00</span></div>
 
-  <input type="number" id="coinInput" placeholder="Enter coins to convert (100 = ₹1)" step="100" min="100">
-  <br>
-  <button class="btn" onclick="convertToCash()">Convert to Cash</button>
-  <br><br>
+  <input type="number" id="coinInput" placeholder="Convert coins (100 = ₹1)" step="100" min="100">
+  <button class="btn" onclick="convertToCash()">Convert</button>
 
-  <input type="number" id="CashInput" placeholder="Enter Amount (min ₹1)" step="1" min="1">
-  <br>
-  <input type="text" id="upiInput" placeholder="Enter your UPI ID or number">
-  <br>
-  <button class="btn btn-withdraw" onclick="withdrawCash()">Withdraw Cash</button>
+  <input type="number" id="CashInput" placeholder="Withdraw ₹ (min 1)" step="1" min="1">
+  <input type="text" id="upiInput" placeholder="Enter UPI ID or number">
+  <button class="btn btn-withdraw" onclick="withdrawCash()">Withdraw</button>
 
   <div class="message" id="messageBox"></div>
+
+  <h3>Transaction History</h3>
+  <div id="historyLog">No transactions yet.</div>
 </div>
 
 <script>
-  // Initial values
-  let coins = 1000;
-  let cash = 0;
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("show");
+  }
 
-  const coinBalance = document.getElementById('coinBalance');
-  const cashBalance = document.getElementById('cashBalance');
-  const messageBox = document.getElementById('messageBox');
+  let coins = parseInt(localStorage.getItem("walletCoins") || "1000");
+  let cash = parseFloat(localStorage.getItem("walletCash") || "0");
+  let history = JSON.parse(localStorage.getItem("walletHistory") || "[]");
+
+  const coinBalance = document.getElementById("coinBalance");
+  const cashBalance = document.getElementById("cashBalance");
+  const messageBox = document.getElementById("messageBox");
+  const historyLog = document.getElementById("historyLog");
 
   function updateDisplay() {
     coinBalance.textContent = coins;
     cashBalance.textContent = cash.toFixed(2);
+    localStorage.setItem("walletCoins", coins);
+    localStorage.setItem("walletCash", cash.toFixed(2));
   }
 
-  function showMessage(text, type) {
-    messageBox.textContent = text;
+  function showMessage(msg, type) {
+    messageBox.textContent = msg;
     messageBox.className = `message ${type}`;
   }
 
+  function addHistory(entry) {
+    const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    history.unshift(`[${time}] ${entry}`);
+    if (history.length > 50) history.pop();
+    localStorage.setItem("walletHistory", JSON.stringify(history));
+    renderHistory();
+  }
+
+  function renderHistory() {
+    if (history.length === 0) {
+      historyLog.innerHTML = "No transactions yet.";
+    } else {
+      historyLog.innerHTML = history.map(e => `<p>${e}</p>`).join("");
+    }
+  }
+
   function convertToCash() {
-    const input = document.getElementById('coinInput');
+    const input = document.getElementById("coinInput");
     const coinsToConvert = parseInt(input.value);
-
     if (isNaN(coinsToConvert) || coinsToConvert < 100 || coinsToConvert % 100 !== 0) {
-      showMessage("❌ Please enter at least 100 coins in multiples of 100.", "error");
+      showMessage("❌ Enter minimum 100 coins in multiples of 100.", "error");
       return;
     }
-
     if (coinsToConvert > coins) {
-      showMessage("❌ You don't have enough coins.", "error");
+      showMessage("❌ Not enough coins.", "error");
       return;
     }
-
-    const rupees = coinsToConvert / 100;
     coins -= coinsToConvert;
+    let rupees = coinsToConvert / 100;
     cash += rupees;
-
     updateDisplay();
+    showMessage(`✅ Converted ${coinsToConvert} coins to ₹${rupees.toFixed(2)}`, "success");
+    addHistory(`Converted ${coinsToConvert} coins to ₹${rupees.toFixed(2)}`);
     input.value = "";
-    showMessage(`✅ Converted ${coinsToConvert} coins to ₹${rupees.toFixed(2)} successfully!`, "success");
   }
 
   function withdrawCash() {
-    const cashInput = document.getElementById('CashInput');
-    const upiInput = document.getElementById('upiInput');
-
-    const amountToWithdraw = parseFloat(cashInput.value);
-    const upi = upiInput.value.trim();
-
-    if (isNaN(amountToWithdraw) || amountToWithdraw < 1) {
-      showMessage("❌ Minimum ₹1 required to withdraw.", "error");
+    const amount = parseFloat(document.getElementById("CashInput").value);
+    const upi = document.getElementById("upiInput").value.trim();
+    if (isNaN(amount) || amount < 1) {
+      showMessage("❌ Minimum ₹1 to withdraw.", "error");
       return;
     }
-
     if (!upi || upi.length < 5) {
-      showMessage("❌ Please enter a valid UPI ID or number.", "error");
+      showMessage("❌ Enter valid UPI ID.", "error");
       return;
     }
-
-    if (amountToWithdraw > cash) {
-      showMessage("❌ You don't have enough cash.", "error");
+    if (amount > cash) {
+      showMessage("❌ Not enough cash.", "error");
       return;
     }
-
-    cash -= amountToWithdraw;
+    cash -= amount;
     updateDisplay();
-    cashInput.value = "";
-    upiInput.value = "";
-
-    showMessage(`✅ ₹${amountToWithdraw.toFixed(2)} withdrawn to ${upi} successfully!`, "success");
+    showMessage(`✅ ₹${amount.toFixed(2)} withdrawn to ${upi}`, "success");
+    addHistory(`Withdrew ₹${amount.toFixed(2)} to ${upi}`);
+    document.getElementById("CashInput").value = "";
+    document.getElementById("upiInput").value = "";
   }
 
+  // Add 5 coins every minute while wallet is open
+  /*setInterval(() => {
+    coins += 5;
+    updateDisplay();
+    addHistory("Auto-added 5 coins");
+  }, 60000);*/
+
   updateDisplay();
+  renderHistory();
 </script>
 
 </body>
