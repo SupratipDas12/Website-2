@@ -1,70 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f0f0f0;
+      margin: 0;
+      padding: 0;
     }
+
     .container {
-      width: 300px;
+      max-width: 360px;
       margin: 80px auto;
       padding: 20px;
       background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(1,0,0,0.2);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    .container h2 {
+
+    h2 {
       text-align: center;
       margin-bottom: 20px;
     }
-    input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
       width: 100%;
-      padding: 20px 0px;
-      font-size: 20px;
-      text-align: center;
+      padding: 12px;
+      font-size: 16px;
       margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 30px;
+      box-sizing: border-box;
+      text-align: center;
     }
+
     input[type="submit"] {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background: #28a745;
       color: white;
+      font-size: 16px;
       border: none;
-      border-radius: 4px;
+      border-radius: 30px;
       cursor: pointer;
+      margin-top: 10px;
     }
+
     input[type="submit"]:hover {
       background: #218838;
     }
-    /*.container a{
-      font-size: 30px;
-      /*text-align: center;*/
-     /* text-decoration: none;
-      float: center;
-      margin-top: 400px;
-      text-align: right;
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
     }
-    .container a:hover{
+
+    .login-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
       text-decoration: underline;
-      text-align: center;
-      margin-top: 400px;
-    }*/
-    .login-link{
-      font-size: 20px;
-      padding: 10px 0;
-      text-align: center;
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        margin: 40px 16px;
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h2>Register</h2>
+  <h2>Create Account</h2>
   <form action="register.php" method="POST">
     <input type="text" name="name" placeholder="Full Name" required>
     <input type="email" name="email" placeholder="Email" required>
@@ -74,10 +92,10 @@
     <input type="submit" value="Register">
   </form>
   <div class="login-link">
-      <p>Already Register?<a href="login.html">login</a></p>
+    Already registered? <a href="login.html">Login here</a>
   </div>
- <!-- <a href="login.html">login</a>-->
 </div>
+
 <script>
   const form = document.querySelector("form");
 
@@ -88,14 +106,12 @@
     const password = form.password.value.trim();
     const confirm = form.confirm_password.value.trim();
 
-    // Check all fields are filled
     if (!name || !email || !mobile || !password || !confirm) {
       alert("Please fill in all fields.");
       e.preventDefault();
       return;
     }
 
-    // Email format check
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     if (!email.match(emailPattern)) {
       alert("Invalid email address.");
@@ -103,26 +119,24 @@
       return;
     }
 
-    // Mobile number check (optional)
     if (!/^\d{10}$/.test(mobile)) {
       alert("Mobile number must be 10 digits.");
       e.preventDefault();
       return;
     }
 
-    // Password length
     if (password.length < 6) {
       alert("Password must be at least 6 characters.");
       e.preventDefault();
       return;
     }
 
-    // Password match
     if (password !== confirm) {
       alert("Passwords do not match.");
       e.preventDefault();
     }
   });
 </script>
+
 </body>
 </html>
