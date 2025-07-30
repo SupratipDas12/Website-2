@@ -1,53 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+    body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      background-color: #f4f4f4;
     }
 
     /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
+    nav {
+      width: 100%;
+      height: 70px;
       background-color: #333;
       color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
     }
 
-    .navbar .name {
+    .logo {
       font-size: 24px;
       font-weight: bold;
     }
 
-    .navbar .links a {
-      color: white;
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: black;
       text-decoration: none;
-      margin-left: 20px;
       font-size: 18px;
-      transition: color 0.2s;
+      text-align: center;
+      transition: 0.3s;
     }
 
-    .navbar .links a:hover {
-      color: #00d1b2;
+    .nav-links a:hover {
+      color: #04AA6D;
     }
 
-    /* Content section */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: lightblue;
+        display: none;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    h1 {
+      margin-top: 100px;
+      font-size: 28px;
+      color: #333;
+    }
+
     .content {
       text-align: center;
       padding: 40px 20px;
     }
 
-    /* Game card styles */
     .game-section {
       display: flex;
       justify-content: center;
       padding: 20px;
+      flex-wrap: wrap;
     }
 
     .game-card {
@@ -57,6 +112,7 @@
       overflow: hidden;
       width: 320px;
       text-align: center;
+      margin: 10px;
       transition: transform 0.3s;
     }
 
@@ -103,73 +159,92 @@
 <body>
 
   <!-- Navbar -->
-  <div class="navbar">
-    <div class="name">Supratip Das</div>
-    <div class="links" id="navLinks">
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
+  <nav>
+    <div class="logo">GameName</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-  </div>
+    <div class="nav-links" id="navLinks">
+      <a href="Home.html">Home</a>
+      <a href="wallet.html">Wallet</a>
+      <a href="#Upi">UPI Change</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
 
-  <!-- Welcome Content -->
+  <!-- Content -->
   <div class="content">
     <h1>Welcome to the Home Page</h1>
-    <p>Choose your game and start playing!</p>
   </div>
 
   <!-- Game Card Section -->
-  <div class="game-section">
+  <div class="game-section" id="gameSection">
+    <!-- Static Card Example -->
     <div class="game-card">
-      <img src="https://via.placeholder.com/300x180.png?text=E-Football+Tournament" alt="Game Image">
+      <img src="https://via.placeholder.com/300x180.png?text=Football+Challenge" alt="Football">
       <div class="card-content">
         <h3>Football Challenge</h3>
         <p>1 vs 1 E-Football Tournament – Win Cash!</p>
-        <a href="game.html" class="play-btn">Play Now</a>
+        <a href="football game card.html" class="play-btn">Play Now</a>
       </div>
     </div>
   </div>
 
-  <!-- Optional JavaScript for Login Session (LocalStorage) -->
-
-<script>
-  const games = [
-    {
-      title: "Football Challenge",
-      description: "1 vs 1 E-Football Tournament – Win Cash!",
-      image: "https://via.placeholder.com/300x180.png?text=E-Football+Tournament",
-      link: "game.html"
-    },
-    {
-      title: "Cricket Clash",
-      description: "Smash sixes and win real money!",
-      image: "https://via.placeholder.com/300x180.png?text=Cricket+Clash",
-      link: "#"
-    },
-    {
-      title: "Car Racing Showdown",
-      description: "Fast-paced racing challenge for all!",
-      image: "https://via.placeholder.com/300x180.png?text=Car+Racing",
-      link: "#"
+  <!-- JavaScript -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("show");
     }
-    // ➕ Add more game objects as needed
-  ];
 
-  const gameSection = document.getElementById('gameSection');
+    // Optional: Dynamic Game Cards (currently not used, but ready if needed)
+    const games = [
+      {
+        title: "Car Racing Showdown",
+        description: "Fast-paced racing challenge for all!",
+        image: "https://via.placeholder.com/300x180.png?text=Car+Racing",
+        link: "#"
+      },
+      /*{
+        title: "Car Racing Showdown",
+        description: "Fast-paced racing challenge for all!",
+        image: "https://via.placeholder.com/300x180.png?text=Car+Racing",
+        link: "#"
+      },*/
+      /*{
+        title: "Cricket Clash",
+        description: "Smash sixes and win real money!",
+        image: "https://via.placeholder.com/300x180.png?text=Cricket+Clash",
+        link: "#" 
+      },*/
+      {
+        title: "Tic Tac Toe",
+        description: "Smash sixes and win real money!",
+        image: "https://via.placeholder.com/300x180.png?text=Cricket+Clash",
+        link: "Tic Tac Toe.html"
+      }
+    ];
 
-  games.forEach(game => {
-    const card = document.createElement('div');
-    card.className = 'game-card';
-    card.innerHTML = `
-      <img src="${game.image}" alt="${game.title}">
-      <div class="card-content">
-        <h3>${game.title}</h3>
-        <p>${game.description}</p>
-        <a href="${game.link}" class="play-btn">Play Now</a>
-      </div>
-    `;
-    gameSection.appendChild(card);
-  });
-</script>
+    const gameSection = document.getElementById('gameSection');
+
+    games.forEach(game => {
+      const card = document.createElement('div');
+      card.className = 'game-card';
+      card.innerHTML = `
+        <img src="${game.image}" alt="${game.title}">
+        <div class="card-content">
+          <h3>${game.title}</h3>
+          <p>${game.description}</p>
+          <a href="${game.link}" class="play-btn">Play Now</a>
+        </div>
+      `;
+      gameSection.appendChild(card);
+    });
+  </script>
 
 </body>
 </html>
